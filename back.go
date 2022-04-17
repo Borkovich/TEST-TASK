@@ -25,9 +25,7 @@ func saveCsv(name string, weight int, color string, id string) {
 	if er != nil {
 		if os.IsNotExist(er) {
 			csvfile, _ := os.OpenFile("valid.csv", os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0666)
-			// writer := csv.NewWriter(csvfile)
 			csvfile.WriteString("id,name,weight,color\n")
-			// writer.Write([]string{"id", "name", "weight", "color"})
 			defer csvfile.Close()
 		}
 	}
