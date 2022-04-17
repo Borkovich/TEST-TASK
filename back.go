@@ -19,7 +19,7 @@ type user struct {
 	color  string
 }
 
-func saveCsv(name string, weight int, color string, id string) (string, error) {
+func saveCsv(name string, weight int, color string, id string) {
 
 	_, er := os.Stat("valid.csv")
 	if er != nil {
@@ -41,7 +41,7 @@ func saveCsv(name string, weight int, color string, id string) (string, error) {
 	writer := csv.NewWriter(csvfile)
 	defer writer.Flush()
 	writer.Write(data)
-	return id, err
+
 }
 
 func validation(name string, weight int) (string, error) {
@@ -56,9 +56,8 @@ func validation(name string, weight int) (string, error) {
 
 }
 
-var tpl = template.Must(template.ParseFiles("index.html"))
-
 func indexHandler(w http.ResponseWriter, r *http.Request) {
+	var tpl = template.Must(template.ParseFiles("index.html"))
 	var mess = map[string]string{"mess": ""}
 	r.ParseForm()
 	fmt.Println(r.Form)
